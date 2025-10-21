@@ -1,7 +1,7 @@
 
 # Summary
 
-Created for SNHU (Southern New Hampshire University) course, GRA 451: Advanced Multimedia Platform.
+Created for [Southern New Hampshire University](https://www.snhu.edu/) course, GRA 451: Advanced Multimedia Platform.
 
 After learning about responsive web design in previous coursework, I created an interactive, responsive website using appropriate tools and languages. Key compliances:
 
@@ -9,7 +9,7 @@ After learning about responsive web design in previous coursework, I created an 
 - Proper metadata set up
 - Responsive coding for multiple media viewpoints/screens
 - HTML/CSS basic build
-- Basic WCAG Level A accesibility
+- Basic WCAG Level A accessibility
 
 # Future edits
 
