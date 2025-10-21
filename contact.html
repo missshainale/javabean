@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en"> 
+    <head> 
+        <title>Java Bean</title>
+
+        <meta charset="UTF-8">
+        <meta name="description" content="GRA 310">
+        <meta name="keywords" content="Java Bea , coffee, food, home">
+        <meta name="author" content="Shaina Le">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Scripts -->
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+        <script src="js/formvalidate.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&family=Hind:wght@300;400&display=swap" rel="stylesheet">
+        
+        <!-- Form Validation -->
+        
+        <script>
+                  var validate = function(e) {
+              var fields = document.querySelectorAll('.form-container textarea, .form-container input[type="text"]');
+              var regEx;
+              var removeSpan;
+              var par;
+              var check = false;
+              var val;
+              var errArr = [];
+          
+              for (var i = 0; i < fields.length; i++) {
+                  if (fields[i].value === "") {
+                    
+                      if (fields[i].nextElementSibling.classList.contains('error')) {
+                        removeSpan = fields[i].nextElementSibling;
+                        par = fields[i].parentNode;
+                        par.removeChild(removeSpan);
+                        fields[i].nextElementSibling.innerHTML = "Attention, " + fields[i].placeholder + " is required. Refresh browser.";
+                        fields[i].style.boxShadow = "0 0 2px 1px #cc0001";
+                        check = false;
+                        errArr.push(fields[i]);
+                      }
+                      fields[i].nextElementSibling.innerHTML = "Attention, " + fields[i].placeholder + " is required. Refresh browser.";
+                      fields[i].style.boxShadow = "0 0 2px 1px #cc0001";
+                      check = false;
+                      errArr.push(fields[i]);
+                  } else {
+          
+                      // check if message and name values contain valid characters.
+                      if (fields[i].id !== 'email' && fields[i].id !== 'phone') {
+                          val = isValidChar(fields[i]);
+                          if(val === false) {
+                            fields[i].nextElementSibling.innerHTML = "Are you trying to HACK ME!";
+                            fields[i].style.boxShadow = "0 0 2px 1px #cc0001";
+                            check = false;
+                            errArr.push(fields[i]);
+                          } else {
+                            fields[i].nextElementSibling.innerHTML = "";
+                            fields[i].style.boxShadow = "none";
+                            check = true;
+                          }
+                      }
+                    
+                      if(fields[i].id === 'phone') {
+                        val = isValidPhone(fields[i]);
+                        if(val === false) {
+                          fields[i].nextElementSibling.innerHTML = "Attention, your phone number is not valid.";
+                          fields[i].style.boxShadow = "0 0 2px 1px #cc0001";
+                          check = false;
+                          errArr.push(fields[i]);
+                        } else {
+                          fields[i].nextElementSibling.innerHTML = "";
+                          fields[i].style.boxShadow = "none";
+                          check = true;  
+                        }
+                      }
+          
+                      if (fields[i].id === 'email') {
+                          val = isValidEmail(fields[i]);
+                          if(val === false) {
+                              fields[i].nextElementSibling.innerHTML = "Attention, your email address is not valid.";
+                              fields[i].style.boxShadow = "0 0 2px 1px #cc0001";
+                              check = false;
+                              errArr.push(fields[i]);
+                          } else {
+                              fields[i].nextElementSibling.innerHTML = "";
+                              fields[i].style.boxShadow = "none";
+                              check = true;
+                          }
+                      }
+                  }
+              }
+            
+              if(check === false) {
+                var count = 0;
+                var toErr = setInterval(function() {
+                  var e = errArr[0].offsetTop + -25;
+                  var pos = Math.abs(e);
+                  if(count < pos) {
+                    count ++;
+                    window.scrollTo(0, count);
+                  } else {
+                    clearInterval(toErr);
+                  }
+                }, 1);
+              }
+              
+              return check
+          
+              // Helper functions.
+              function isValidEmail(e) {
+                  regEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                  var email = e.value;
+                  if (!regEx.test(email)) {
+                      return false;
+                  }
+              }
+          
+              function isValidChar(e) {
+                  regEx = /^[a-zA-Z@#$%!?^&*()_+\-=\[\]{};':"\\|,.\/? ]*$/;
+                  var value = e.value;
+                  if (!regEx.test(value)) {
+                      return false;
+                  }
+              }
+            
+              function isValidPhone(e) {
+                regEx = /^[+]?[(]?[+]?\d{2,4}[)]?[-\s]?\d{2,8}[-\s]?\d{2,8}$/;
+                var value = e.value;
+                if(!regEx.test(value)) {
+                  return false;
+                }
+              }
+          };
+          
+        </script>
+
+      <script>
+        var cd;
+
+$(function(){
+  CreateCaptcha();
+});
+
+// Create Captcha
+function CreateCaptcha() {
+  //$('#InvalidCapthcaError').hide();
+  var alpha = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+                    
+  var i;
+  for (i = 0; i < 6; i++) {
+    var a = alpha[Math.floor(Math.random() * alpha.length)];
+    var b = alpha[Math.floor(Math.random() * alpha.length)];
+    var c = alpha[Math.floor(Math.random() * alpha.length)];
+    var d = alpha[Math.floor(Math.random() * alpha.length)];
+    var e = alpha[Math.floor(Math.random() * alpha.length)];
+    var f = alpha[Math.floor(Math.random() * alpha.length)];
+  }
+  cd = a + ' ' + b + ' ' + c + ' ' + d + ' ' + e + ' ' + f;
+  $('#CaptchaImageCode').empty().append('<canvas id="CapCode" class="capcode" width="300" height="80"></canvas>')
+  
+  var c = document.getElementById("CapCode"),
+      ctx=c.getContext("2d"),
+      x = c.width / 2,
+      img = new Image();
+
+  img.src = "https://usiseane.sirv.com/binary-numbers-pattern.jpg";
+  img.onload = function () {
+      var pattern = ctx.createPattern(img, "repeat");
+      ctx.globalAlpha = "0.7";
+      ctx.fillStyle = pattern;
+      ctx.fillRect(0, 0, c.width, c.height);
+      ctx.font="52px Roboto";
+      ctx.fillStyle = 'lightgreen';
+      ctx.textAlign = 'center';
+      ctx.setTransform (1, -0.12, 0, 1, 0, 15);
+      ctx.fillText(cd,x,55);
+  };
+  
+}
+
+//
+function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+  if (typeof stroke === 'undefined') {
+    stroke = true;
+  }
+  if (typeof radius === 'undefined') {
+    radius = 5;
+  }
+  if (typeof radius === 'number') {
+    radius = {tl: radius, tr: radius, br: radius, bl: radius};
+  } else {
+    var defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
+    for (var side in defaultRadius) {
+      radius[side] = radius[side] || defaultRadius[side];
+    }
+  }
+  ctx.beginPath();
+  ctx.moveTo(x + radius.tl, y);
+  ctx.lineTo(x + width - radius.tr, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+  ctx.lineTo(x + width, y + height - radius.br);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+  ctx.lineTo(x + radius.bl, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+  ctx.lineTo(x, y + radius.tl);
+  ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+  ctx.closePath();
+  if (fill) {
+    ctx.fill();
+  }
+  if (stroke) {
+    ctx.stroke();
+  }
+
+}
+
+// Validate Captcha
+function ValidateCaptcha() {
+  var string1 = removeSpaces(cd);
+  var string2 = removeSpaces($('#UserCaptchaCode').val());
+  if (string1 == string2) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+// Remove Spaces
+function removeSpaces(string) {
+  return string.split(' ').join('');
+}
+
+// Check Captcha
+function CheckCaptcha() {
+  var result = ValidateCaptcha();
+  if( $("#UserCaptchaCode").val() == "" || $("#UserCaptchaCode").val() == null || $("#UserCaptchaCode").val() == "undefined") {
+    $('#WrongCaptchaError').text('Please enter code given below in a picture.').show();
+    $('#UserCaptchaCode').focus();
+  } else {
+    if(result == false) { 
+      $('#WrongCaptchaError').text('Invalid Captcha! Please try again.').show();
+      CreateCaptcha();
+      $('#UserCaptchaCode').focus().select();
+    }
+    else { 
+      $('#UserCaptchaCode').val('').attr('place-holder','Enter Captcha - Case Sensitive');
+      CreateCaptcha();
+      $('#WrongCaptchaError').fadeOut(100);
+      $('#SuccessMessage').fadeIn(500).css('display','block').delay(5000).fadeOut(250);
+    }
+  }  
+}
+      </script>
+
+    </head>
+
+    <body> 
+
+      <nav>
+        <div class="navlogo">Java Bean</div>
+      
+        <div class="navbar">
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
+            <li class="nav-item"><a href="locations.html" class="nav-link">Locations</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </div>
+      
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+       
+
+
+    <!--header-->
+
+        <header class="header-paralax-small-menu">
+
+          </header>
+
+          <div class="subpage">
+            <div class="container">    
+              <h1>Contact</h1>
+
+              <div class="row2">
+                <div class="columntall" style="border-bottom: 10px solid #7E0000;">
+                    
+                    <!--Form-->
+
+                    <div class="form-container">
+                      <form name="contactForm" method="post" onsubmit = "return validate()" action="#">
+                      <div class="col-25">
+                        <label for="name">* Name</label>
+                      </div>
+                        <input type="text" id="name" name="name" placeholder="full name" >
+                        <span class="errors"></span><br>
+                    
+                      <div class="col-25">                    
+                        <label for="email">* Email</label>
+                      </div>
+                        <input type="text" placeholder="email address" id="email" name="email" >
+                        <span class="errors"></span><br>
+                    
+                      <div class="col-25">
+                        <label for="phone">* Phone</label>
+                      </div>
+                        <input type="text" placeholder="phone number" id="phone" name="phone" >
+                        <span class="errors"></span><br>
+                        
+                      <div class="col-25">  
+                        <label for="inquiry">* Inquiry</label>
+                      </div>
+                        <select id="inquiry" name="inquiry">
+                          <option value="food">Food Prep</option>
+                          <option value="service">Customer Service</option>
+                          <option value="company">Company</option>
+                        </select>
+
+                      <div class="col-25">
+                        <label for="location">* Location</label>
+                      </div>
+                        <select id="location" name="location">
+                          <option value="city1">City 1</option>
+                          <option value="city2">City 2</option>
+                        </select>
+                        
+                      <div class="col-25">  
+                        <label for="subject">* Message</label>
+                      </div>
+                        <textarea placeholder="your message" cols="132" rows="5" name="subject" id="subject"></textarea>
+                        <span class="errors"></span><br>
+                    
+                        <button type="submit" value="Submit">Submit</button>
+                      </form>
+                      <section>
+                        <fieldset>
+                          <span id="SuccessMessage" class="success">Hurray! Your have successfully entered the captcha.</span>
+                          <input type="text" id="UserCaptchaCode" class="CaptchaTxtField" placeholder='Enter Captcha - Case Sensitive'>
+                          <span id="WrongCaptchaError" class="error"></span>
+                          <div class='CaptchaWrap'>
+                            <div id="CaptchaImageCode" class="CaptchaTxtField">
+                              <canvas id="CapCode" class="capcode" width="300" height="80"></canvas>
+                            </div> 
+                            <button class="ReloadBtn" onclick='CreateCaptcha();' title="Reload Image">
+                              <i class="fa fa-refresh" aria-hidden="true"></i>
+                            </button>
+                          </div>
+                          <input type="button" class="btnSubmit" onclick="CheckCaptcha();" value="Verify">
+                        </fieldset>
+                      </section>
+                    </div>
+<br><br>
+
+                </div>
+                <div class="columntall" style="border-bottom: 10px solid #7E0000;">
+                    <h3>Map</h3><br>
+
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2916.1527947668746!2d-71.45193032387317!3d43.03821657113789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e24595182c672d%3A0x1af9c9f4bffd579e!2sSouthern%20New%20Hampshire%20University!5e0!3m2!1sen!2sus!4v1689997030244!5m2!1sen!2sus" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<br>
+                    <h3 style="padding-top:10%;">Hours</h3>
+                    <ul style="font-family: 'Hind', sans-serif; font-size:0.9em; padding-top:5%; margin-left:5%;">
+                      <li>Sunday: 6:00AM - 9:00PM</li>
+                      <li>Monday:  5:00AM - 9:00PM</li>
+                      <li>Tuesday:  5:00AM - 9:00PM</li>
+                      <li>Wednesday:  5:00AM - 9:00PM</li>
+                      <li>Thursday:  5:00AM - 9:00PM</li>
+                      <li>Friday:  5:00AM - 9:00PM</li>
+                      <li>Saturday: 6:00AM - 9:00PM</li>
+                    </ul>
+
+                </div>
+              </div>
+
+            </div>
+        </div>
+<!--footer-->
+            
+<footer>
+    <div class="footer2">
+    <div class="frow">
+    <a href="https://www.facebook.com/"><i class="fa fa-facebook" alt="facebook logo"></i></a>
+    <a href="https://instagram.com/"><i class="fa fa-instagram" alt="instagram logo"></i></a>
+    <a href="https://twitter.com/"><i class="fa fa-twitter" alt="old twitter logo"></i></a>
+    </div>
+    
+    <div class="frow">
+      <ul>
+        <li>123 Coffee Ave</li>
+        <li>City, USA</li>
+        <li>(123) 456 - 7890</li>
+      </ul>
+    </div>
+    
+      <div class="frow">
+      Java Bean Copyright © 2023 - Present
+      </div>
+    </div>
+  </footer>
+
+        </div>
+
+    </body>
+            <script src="js/frontpage.js"></script>
+        <script src="js/menu.js"></script>
+</html>
