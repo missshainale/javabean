@@ -187,12 +187,12 @@ ul, ul {
 }
 
 a.sitemap {
-  color: #883E24;
+  color: #883E24 !important;
   text-decoration: none;
 }
 
 a.sitemap:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 .navbar {
@@ -600,7 +600,7 @@ a.nav-link:hover {
     .rowimage {
       width: 50%;
       height: 100%;
-      background-position: top;
+      background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
       float: right;
