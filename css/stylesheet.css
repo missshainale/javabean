@@ -422,6 +422,7 @@ a.nav-link:hover {
   .darkcontainer {
     width:100%;
     background-color: #191312;
+    min-height: 400px;
   }
   
   .darkcontainer h1 {
@@ -600,6 +601,7 @@ a.nav-link:hover {
     .rowimage {
       width: 50%;
       height: 100%;
+      min-height: 450px;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
