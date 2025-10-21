@@ -441,7 +441,7 @@ a.nav-link:hover {
   }
 
   .lightimage {
-    background-image: url('/images/cafeexterior.jpg');
+    background-image: url('..images/cafeexterior.jpg');
   }
   
   .lightimage {
@@ -594,7 +594,7 @@ a.nav-link:hover {
     }
 
     .rowimage {
-      background-image: url('/images/coffeecrop.jpg');
+      background-image: url('..images/coffeecrop.jpg');
     }
     
     .rowimage {
@@ -1036,7 +1036,7 @@ button:hover {
   @media (max-width:720px){
     
     .header-paralax-small-contact {
-    background-image: url('/images/beansblur.jpg');
+    background-image: url('..images/beansblur.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -1047,7 +1047,7 @@ button:hover {
   }
 
   .header-paralax-small-about {
-    background-image: url('images/beansblur.jpg');
+    background-image: url('..images/beansblur.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -1058,7 +1058,7 @@ button:hover {
   }
 
   .header-paralax-small-menu {
-    background-image: url('/images/beansblur.jpg');
+    background-image: url('..images/beansblur.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -1069,7 +1069,7 @@ button:hover {
   }
   
   .header-paralax-small-location {
-    background-image: url('/images/beansblur.jpg');
+    background-image: url('..images/beansblur.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
