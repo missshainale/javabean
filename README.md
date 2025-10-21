@@ -8,6 +8,7 @@ After learning about responsive web design in previous coursework, I created an 
 - Proper <head> and <footer> set up
 - Proper metadata set up
 - Responsive coding for multiple media viewpoints/screens
+- Working form and CAPTCHA script
 - HTML/CSS basic build
 - Basic WCAG Level A accessibility
 
